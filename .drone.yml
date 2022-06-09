@@ -1,0 +1,11 @@
+---
+kind: pipeline
+name: build/upload pypi package
+type: docker
+
+steps:
+  - name:  build and publish poetry project
+    image: austin1howard/drone-plugin-poetry:latest
+    settings:
+      pypi_token:
+        from_secret: pypi_token

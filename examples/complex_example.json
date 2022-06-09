@@ -1,0 +1,84 @@
+[
+  {
+    "name": "Austin",
+    "address": {
+      "lines": [
+        "123 Main St",
+        "Unit 314"
+      ],
+      "city": "Somewhere",
+      "state": "TX"
+    },
+    "age": 100,
+    "pets": [
+      {
+        "kind": "dog",
+        "name": "Kenzie",
+        "age": 1
+      },
+      {
+        "kind": "robot",
+        "name": "Momo",
+        "brand": "Neato"
+      }
+    ],
+    "languages": [
+      {
+        "name": "English",
+        "fluency": 10
+      },
+      {
+        "name": "Spanish",
+        "fluency": 1
+      }
+    ],
+    "jobs": [
+      {
+        "company": "Tangible Intelligence",
+        "title": "CTO"
+      }
+    ]
+  },
+  {
+    "name": "Bob",
+    "address": {
+      "lines": [
+        "123 Nowhere Ln"
+      ],
+      "city": "Anywhere",
+      "state": "KS"
+    },
+    "age": 99,
+    "pets": [
+      {
+        "kind": "cat",
+        "name": "Snugglebug",
+        "age": 10
+      },
+      {
+        "kind": "fish",
+        "name": "Sharky"
+      }
+    ],
+    "languages": [
+      {
+        "name": "English",
+        "fluency": 10
+      },
+      {
+        "name": "French",
+        "fluency": 5
+      }
+    ],
+    "jobs": [
+      {
+        "company": "Tangible Intelligence",
+        "title": "Ex. Assistant"
+      },
+      {
+        "company": "Conjectural Technologies",
+        "title": "Founder"
+      }
+    ]
+  }
+]
