@@ -1,9 +1,19 @@
 [tool.poetry]
 name = "tidify"
-version = "0.1.0"
+version = "0.1.1"
 description = "Convert nested objects into tidy data"
 authors = ["Austin Howard <austin@tangibleintelligence.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/tangibleintelligence/tidify"
+repository = "https://github.com/tangibleintelligence/tidify"
+keywords = [
+    "Tidy Data",
+    "Data Analysis"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
