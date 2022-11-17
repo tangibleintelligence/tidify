@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tidify"
-version = "0.1.1"
+version = "0.1.2"
 description = "Convert nested objects into tidy data"
 authors = ["Austin Howard <austin@tangibleintelligence.com>"]
 license = "MIT"
