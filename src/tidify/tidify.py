@@ -1,5 +1,5 @@
 from functools import cmp_to_key, partial
-from typing import List, Dict, Any, Union, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import pandas as pd
 
@@ -124,6 +124,11 @@ def convert_to_tidy(
         # An object was passed in.
         # We can remove any keys which match the exclusion list
         remaining_data = {k: v for k, v in remaining_data.items() if k not in exclude}
+
+        # Convert empty stuff to None
+        for k, v in remaining_data.items():
+            if v == [] or v == {}:
+                remaining_data[k] = None
 
         # Any arrays or subobjects on this object? If so, we need to expand on them
         arrays = [k for k, v in remaining_data.items() if isinstance(v, list) or isinstance(v, tuple)]
