@@ -116,6 +116,7 @@ def convert_to_tidy(
 
     Warning: recursive logic ahead :)
     """
+
     # If an iterable was passed in, need to make record(s) for each element
     if isinstance(remaining_data, list) or isinstance(remaining_data, tuple):
         for idx, row in enumerate(remaining_data):
@@ -138,27 +139,40 @@ def convert_to_tidy(
             # We'll expand on one of them (creating fixed_data of a row index) and pass the contents, as well as any other fields at this
             # level as remaining data.
             array_key = arrays[0]
-            for sub_idx, sub_row_or_primitive in enumerate(remaining_data[array_key]):
-                # Only thing we can fix right now is the array index column (and anything that was already fixed)
+
+            if len(remaining_data[array_key]) == 0:  # Handle situation where list of Tuple is empty
                 fixed = {
                     **fixed_data,
-                    f"{array_key}{sep}index": sub_idx,
-                }
-                # The values in this array get prepended with the array key, and everything else goes in straight
-                # If this was an array of primitives (strings, ints, etc.) then we can use those directly. otherwise
-                # need another level of nesting.
-                if hasattr(sub_row_or_primitive, "items"):
-                    remaining = {
-                        **{f"{array_key}{sep}{k}": v for k, v in sub_row_or_primitive.items()},
-                        **{k: v for k, v in remaining_data.items() if k != array_key},
+                    f"{array_key}": None
                     }
-                else:
-                    remaining = {
-                        f"{array_key}": sub_row_or_primitive,
-                        **{k: v for k, v in remaining_data.items() if k != array_key},
+                remaining = {
+                        f"{array_key}": None,
+                        **{k: v for k, v in remaining_data.items() if k != array_key}, # This may never run
                     }
-
                 convert_to_tidy(remaining, fixed, tidy_data, exclude, sep)
+
+            else:
+                for sub_idx, sub_row_or_primitive in enumerate(remaining_data[array_key]):
+                    # Only thing we can fix right now is the array index column (and anything that was already fixed)
+                    fixed = {
+                        **fixed_data,
+                        f"{array_key}{sep}index": sub_idx,
+                    }
+                    # The values in this array get prepended with the array key, and everything else goes in straight
+                    # If this was an array of primitives (strings, ints, etc.) then we can use those directly. otherwise
+                    # need another level of nesting.
+                    if hasattr(sub_row_or_primitive, "items"):
+                        remaining = {
+                            **{f"{array_key}{sep}{k}": v for k, v in sub_row_or_primitive.items()},
+                            **{k: v for k, v in remaining_data.items() if k != array_key},
+                        }
+                    else:
+                        remaining = {
+                            f"{array_key}": sub_row_or_primitive,
+                            **{k: v for k, v in remaining_data.items() if k != array_key},
+                        }
+
+                    convert_to_tidy(remaining, fixed, tidy_data, exclude, sep)
         elif len(subobjects) >= 1:
             # Nothing new to fix here. But we can "flatten" the nesting of object into new top-level remaining_data
             remaining = dict()
